@@ -1,0 +1,400 @@
+select e.e_name,d.department_name from employees e right join departments d on e.department_id=d.department_id;
+
+-- 2
+select e.e_name,d.department_name from employees e right join departments d on e.department_id=d.department_id;
+
+-- 3
+select e.e_id,e.e_name,d.department_name from employees e right join departments d on e.department_id=d.department_id;
+
+-- 4
+select distinct d.department_name from employees e right join departments d on e.department_id=d.department_id;
+
+-- 5
+select e.salary,d.department_name from employees e right join departments d on e.department_id=d.department_id;
+
+-- 6
+select e.e_name,d.department_name from employees e right join departments d on e.department_id=d.department_id;
+
+-- 7
+select d.department_name,d.department_id,e.e_name from employees e right join departments d on e.department_id=d.department_id;
+
+-- 8
+select e.address,e.e_name,d.department_name from employees e right join departments d on e.department_id=d.department_id;
+
+-- 9
+select e.e_name,d.department_name,salary from employees e right join departments d on e.department_id=d.department_id and salary>=50000;
+
+-- 10
+select e.e_name,d.department_name,salary from employees e right join departments d on e.department_id=d.department_id where salary between 30000 and 60000;
+
+-- 11
+select e.e_name,d.department_name from employees e right join departments d on e.department_id=d.department_id order by e.e_name asc;
+
+-- 12
+select e.e_name,d.department_name from employees e right join departments d on e.department_id=d.department_id order by department_name asc;
+
+-- 13
+select e.e_name,d.department_id from employees e right join departments d on e.department_id=d.department_id where e.e_name is not null;
+
+-- 14
+select e.e_name,d.department_name,salary from employees e right join departments d on e.department_id=d.department_id order by salary asc;
+
+-- 15
+select e.e_name,d.department_name,salary from employees e right join departments d on e.department_id=d.department_id;
+
+-- 16
+select e.e_name,d.department_name from employees e right join departments d on e.department_id=d.department_id and e.e_name like "a%";
+
+-- 17
+select e.e_name,d.department_name,e.salary from employees e right join departments d on e.department_id=d.department_id and salary>40000;
+
+-- 18
+select e.e_name,d.department_name,e.salary from employees e right join departments d on e.department_id=d.department_id where salary<50000;
+
+-- 19
+select e.e_name,d.department_name,e.salary from employees e right join departments d on e.department_id=d.department_id order by salary desc;
+
+-- 20
+select e.e_name,d.department_name from employees e right join departments d on e.department_id=d.department_id order by e.e_name asc;
+
+-- 21
+select d.department_name,count(e.e_name) cnt from employees e right join departments d on e.department_id=d.department_id group by d.department_name;
+
+-- 22
+select d.department_name,avg(salary) from employees e right join departments d on e.department_id=d.department_id group by d.department_name;
+
+-- 23
+select e.e_name,d.department_name from employees e right join departments d on e.department_id=d.department_id union select e.e_name,d.department_name from employees e left join departments d on e.department_id=d.department_id;
+
+-- 24
+select e.e_name,d.department_id from employees e left join departments d on e.department_id=d.department_id where d.department_id is null;
+
+-- 25
+select d.department_name,avg(e.salary) from employees e right join departments d on e.department_id=d.department_id group by department_name union select d.department_name,avg(e.salary) from employees e left join departments d on e.department_id=d.department_id group by department_name;
+
+-- 26
+select e.e_name,d.department_name from employees e right join departments d on e.department_id=d.department_id;
+
+-- 27
+select e.e_name,d.department_name,salary from employees e right join departments d on e.department_id=d.department_id;
+
+
+-- 28. right join and group by to find the average salary of employees in each department
+select d.department_name, avg(e.salary) as average_salary
+from employees e
+right join departments d
+on e.department_id = d.department_id
+group by d.department_name;
+
+
+-- 29. return all employees and all departments, including unmatched records
+select e.e_id, e.e_name, e.department_id, d.department_name
+from employees e
+left join departments d
+on e.department_id = d.department_id
+union
+select e.e_id, e.e_name, e.department_id, d.department_name
+from employees e
+right join departments d
+on e.department_id = d.department_id;
+
+
+-- 30. return employee name and department name using simulated full outer join
+select e.e_name, d.department_name
+from employees e
+left join departments d
+on e.department_id = d.department_id
+union
+select e.e_name, d.department_name
+from employees e
+right join departments d
+on e.department_id = d.department_id;
+
+
+-- 31. return emp_id, emp_name, dept_id, and dept_name including unmatched records
+select e.e_id, e.e_name, e.department_id, d.department_name
+from employees e
+left join departments d
+on e.department_id = d.department_id
+union
+select e.e_id, e.e_name, e.department_id, d.department_name
+from employees e
+right join departments d
+on e.department_id = d.department_id;
+
+
+-- 32. all employees and all departments, including unmatched records
+select e.e_id, e.e_name, d.department_name
+from employees e
+left join departments d
+on e.department_id = d.department_id
+union
+select e.e_id, e.e_name, d.department_name
+from employees e
+right join departments d
+on e.department_id = d.department_id;
+
+
+-- 33. all employees and departments sorted by department name
+select e.e_name, d.department_name
+from employees e
+left join departments d
+on e.department_id = d.department_id
+union
+select e.e_name, d.department_name
+from employees e
+right join departments d
+on e.department_id = d.department_id
+order by department_name;
+
+
+-- 34. employee names and department names, including null values
+select e.e_name, d.department_name
+from employees e
+left join departments d
+on e.department_id = d.department_id
+union
+select e.e_name, d.department_name
+from employees e
+right join departments d
+on e.department_id = d.department_id;
+
+
+-- 35. employees who don't belong to any department
+select e.e_id, e.e_name, e.department_id
+from employees e
+left join departments d
+on e.department_id = d.department_id
+where d.department_id is null;
+
+
+-- 36. departments that don't have any employees
+select d.department_id, d.department_name
+from employees e
+right join departments d
+on e.department_id = d.department_id
+where e.e_id is null;
+
+
+-- 37. employees with department names, including employees without departments
+select e.e_name, d.department_name
+from employees e
+left join departments d
+on e.department_id = d.department_id;
+
+
+-- 38. departments with employee names, including departments without employees
+select d.department_name, e.e_name
+from employees e
+right join departments d
+on e.department_id = d.department_id;
+
+
+-- 39. all employees and departments where employee salary is greater than 50000
+select e.e_name, e.salary, d.department_name
+from employees e
+left join departments d
+on e.department_id = d.department_id
+where e.salary > 50000
+union
+select e.e_name, e.salary, d.department_name
+from employees e
+right join departments d
+on e.department_id = d.department_id
+where e.salary > 50000 or e.e_id is null;
+
+
+-- 40. all employees and departments where department location is Hyderabad
+select e.e_name, d.department_name, d.dept_location
+from employees e
+left join departments d
+on e.department_id = d.department_id
+where d.dept_location = 'hyderabad'
+union
+select e.e_name, d.department_name, d.dept_location
+from employees e
+right join departments d
+on e.department_id = d.department_id
+where d.dept_location = 'hyderabad';
+
+
+-- 41. all employee and department records sorted by emp_name
+select e.e_name, d.department_name
+from employees e
+left join departments d
+on e.department_id = d.department_id
+union
+select e.e_name, d.department_name
+from employees e
+right join departments d
+on e.department_id = d.department_id
+order by e_name;
+
+
+-- 42. all employee and department records sorted by dept_name
+select e.e_name, d.department_name
+from employees e
+left join departments d
+on e.department_id = d.department_id
+union
+select e.e_name, d.department_name
+from employees e
+right join departments d
+on e.department_id = d.department_id
+order by department_name;
+
+
+-- 43. employees who have no matching department
+select e.e_id, e.e_name, e.department_id
+from employees e
+left join departments d
+on e.department_id = d.department_id
+where d.department_id is null;
+
+
+-- 44. departments that have no matching employee
+select d.department_id, d.department_name
+from employees e
+right join departments d
+on e.department_id = d.department_id
+where e.e_id is null;
+
+
+-- 45. emp_name, salary, dept_name, and location using simulated full outer join
+select e.e_name, e.salary, d.department_name, d.dept_location
+from employees e
+left join departments d
+on e.department_id = d.department_id
+union
+select e.e_name, e.salary, d.department_name, d.dept_location
+from employees e
+right join departments d
+on e.department_id = d.department_id;
+
+
+-- 46. count employees for every department including zero employees
+select d.department_id, d.department_name, count(e.e_id) as employee_count
+from employees e
+right join departments d
+on e.department_id = d.department_id
+group by d.department_id, d.department_name;
+
+
+-- 47. average salary for every department including departments with no employees
+select d.department_id, d.department_name, avg(e.salary) as average_salary
+from employees e
+right join departments d
+on e.department_id = d.department_id
+group by d.department_id, d.department_name;
+
+
+-- 48. all unmatched records from both employees and departments
+select e.e_id, e.e_name, e.department_id, d.department_id, d.department_name
+from employees e
+left join departments d
+on e.department_id = d.department_id
+where d.department_id is null
+union
+select e.e_id, e.e_name, e.department_id, d.department_id, d.department_name
+from employees e
+right join departments d
+on e.department_id = d.department_id
+where e.e_id is null;
+
+
+-- 49. every possible combination of employees and departments
+select *
+from employees
+cross join departments;
+
+
+-- 50. employee name and every department name
+select e.e_name, d.department_name
+from employees e
+cross join departments d;
+
+
+-- 51. emp_id, emp_name, and dept_name
+select e.e_id, e.e_name, d.department_name
+from employees e
+cross join departments d;
+
+
+-- 52. every employee with every department location
+select e.e_name, d.dept_location
+from employees e
+cross join departments d;
+
+
+-- 53. employee name, department name, and department location
+select e.e_name, d.department_name, d.dept_location
+from employees e
+cross join departments d;
+
+
+-- 54. total number of rows produced by cross join
+select count(*) as total_rows
+from employees
+cross join departments;
+
+
+-- 55. every combination sorted by employee name
+select e.e_name, d.department_name
+from employees e
+cross join departments d
+order by e.e_name;
+
+
+-- 56. every combination sorted by department name
+select e.e_name, d.department_name
+from employees e
+cross join departments d
+order by d.department_name;
+
+
+-- 57. every employee with departments located in Hyderabad
+select e.e_name, d.department_name, d.dept_location
+from employees e
+cross join departments d
+where d.dept_location = 'hyderabad';
+
+
+-- 58. every employee with departments located in Bangalore
+select e.e_name, d.department_name, d.dept_location
+from employees e
+cross join departments d
+where d.dept_location = 'bangalore';
+
+
+-- 59. employee and department combinations where salary is greater than 50000
+select e.e_name, d.department_name
+from employees e
+cross join departments d
+where e.salary > 50000;
+
+
+-- 60. employee and department combinations where salary is between 30000 and 60000
+select e.e_name, d.department_name
+from employees e
+cross join departments d
+where e.salary between 30000 and 60000;
+
+
+-- 61. every employee with every department, salary and location
+select e.e_name, e.salary, d.department_name, d.dept_location
+from employees e
+cross join departments d;
+
+
+-- 62. every employee with every department, ordered by salary descending
+select e.e_name, e.salary, d.department_name
+from employees e
+cross join departments d
+order by e.salary desc;
+
+
+-- 63. all possible employee-department combinations and total number of combinations
+select e.e_name, d.department_name,
+       (select count(*) from employees cross join departments) as total_combinations
+from employees e
+cross join departments d;
